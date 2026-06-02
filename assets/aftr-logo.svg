@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1550.31 306.57">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ee4a31;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <rect class="cls-1" x="68.46" y=".31" width="219.79" height="61.25"/>
+        <rect class="cls-1" y="61.57" width="68.46" height="122.5"/>
+        <rect class="cls-1" x="288.24" y="61.57" width="68.46" height="122.5"/>
+        <rect class="cls-1" y="184.07" width="68.46" height="122.5"/>
+        <rect class="cls-1" x="288.24" y="184.07" width="68.46" height="122.5"/>
+        <rect class="cls-1" x="68.46" y="122.82" width="219.79" height="61.25"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="492.48" y="0" width="219.79" height="61.25" transform="translate(1204.7451 61.2519) rotate(-180)"/>
+        <rect class="cls-1" x="424.02" y="0" width="68.46" height="306.26" transform="translate(916.5 306.26) rotate(-180)"/>
+        <rect class="cls-1" x="492.48" y="122.5" width="219.79" height="61.25" transform="translate(1204.7451 306.259) rotate(-180)"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="1481.85" y="61.25" width="68.46" height="61.09"/>
+        <rect class="cls-1" x="1412.87" y="243.91" width="68.46" height="61.09"/>
+        <rect class="cls-1" x="1481.5" y="243.91" width="68.46" height="61.09"/>
+        <rect class="cls-1" x="1344.76" y="183.01" width="68.46" height="61.09"/>
+        <g>
+          <rect class="cls-1" x="1262.2" y="0" width="219.79" height="61.25" transform="translate(2744.1832 61.2519) rotate(-180)"/>
+          <rect class="cls-1" x="1193.74" y="0" width="68.46" height="306.26" transform="translate(2455.9396 306.259) rotate(-180)"/>
+          <rect class="cls-1" x="1262.2" y="122.5" width="219.79" height="61.25" transform="translate(2744.1832 306.259) rotate(-180)"/>
+        </g>
+      </g>
+      <g>
+        <polygon class="cls-1" points="1126.06 0 1057.69 0 1057.6 0 768.73 0 768.73 61.25 1057.69 61.25 1057.69 61.09 1126.06 61.09 1126.06 0"/>
+        <rect class="cls-1" x="913.17" y="0" width="68.46" height="306.26" transform="translate(1894.789 306.259) rotate(-180)"/>
+      </g>
+    </g>
+  </g>
+</svg>
