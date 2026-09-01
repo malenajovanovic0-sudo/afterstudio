@@ -83,101 +83,16 @@
     }
   }
 
-  /* -------------------- Service hover image (fixed-area, blur crossfade) -------------------- */
-  function setupServiceHoverImage() {
-    if (prefersReduced) return;
-    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!hasFinePointer) return;
-
-    const wrap = document.querySelector('.services-stage-wrap');
-    const stage = document.querySelector('.service-hover-stage');
-    const list = document.querySelector('.services-list');
-    if (!wrap || !stage || !list) return;
-
-    const slots = stage.querySelectorAll('.service-hover-image');
-    if (slots.length < 2) return;
-
-    const rows = list.querySelectorAll('.service-row[data-image]');
-    if (rows.length === 0) return;
-
-    const mqBig = window.matchMedia('(min-width: 1100px)');
-    const ENTER_MS = 600;
-    const EXIT_MS = 420;
-
-    let activeSlot = null;
-    const exitTimeouts = new WeakMap();
-
-    function pickInactiveSlot() {
-      return activeSlot === slots[0] ? slots[1] : slots[0];
-    }
-
-    function anchorTopFor(row) {
-      const wrapRect = wrap.getBoundingClientRect();
-      const rowRect = row.getBoundingClientRect();
-      return (rowRect.top - wrapRect.top) + rowRect.height / 2;
-    }
-
-    function hideSlot(slot) {
-      slot.classList.remove('is-visible');
-      slot.classList.add('is-exiting');
-      const t = setTimeout(() => {
-        slot.classList.remove('is-exiting');
-        exitTimeouts.delete(slot);
-      }, EXIT_MS);
-      exitTimeouts.set(slot, t);
-    }
-
-    function show(row) {
-      if (!mqBig.matches) return;
-
-      const src = row.getAttribute('data-image');
-      if (!src) return;
-
-      // Same row re-trigger — just re-anchor.
-      if (activeSlot && activeSlot.dataset.currentSrc === src) {
-        activeSlot.style.top = anchorTopFor(row) + 'px';
-        return;
-      }
-
-      const slot = pickInactiveSlot();
-
-      const pending = exitTimeouts.get(slot);
-      if (pending) { clearTimeout(pending); exitTimeouts.delete(slot); }
-
-      if (slot.dataset.currentSrc !== src) {
-        slot.src = src;
-        slot.dataset.currentSrc = src;
-      }
-
-      slot.style.top = anchorTopFor(row) + 'px';
-      slot.classList.remove('is-exiting');
-      slot.classList.remove('is-visible');
-      // Force reflow so the initial (hidden) state is committed before adding is-visible,
-      // ensuring the transition runs from initial → visible. Works even in hidden tabs.
-      void slot.offsetWidth;
-      slot.classList.add('is-visible');
-
-      if (activeSlot && activeSlot !== slot) {
-        hideSlot(activeSlot);
-      }
-      activeSlot = slot;
-    }
-
-    function hideActive() {
-      if (activeSlot) {
-        hideSlot(activeSlot);
-        activeSlot = null;
-      }
-    }
-
-    rows.forEach(row => {
-      row.addEventListener('mouseenter', () => show(row));
-    });
-    list.addEventListener('mouseleave', hideActive);
-
-    // If the layout drops below the 1100px threshold while an image is showing, clear it.
-    mqBig.addEventListener('change', e => {
-      if (!e.matches) hideActive();
+  /* -------------------- Gallery (CSS auto-scroll marquee) --------------------
+     The strip scrolls itself continuously via CSS animation — no scroll
+     hijacking, nothing tied to page scroll position. It just runs.
+  ------------------------------------------------------------------------- */
+  function setupGallery() {
+    const track = document.querySelector('.gallery-track');
+    if (!track) return;
+    // Pause while the tab is hidden so it doesn't drift/jump on return.
+    document.addEventListener('visibilitychange', function () {
+      track.style.animationPlayState = document.hidden ? 'paused' : '';
     });
   }
 
@@ -253,7 +168,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     runTypewriter();
     setupReveal();
-    setupServiceHoverImage();
+    setupGallery();
     setupMagneticCTA();
     setupParallax();
   });
